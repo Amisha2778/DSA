@@ -1,0 +1,21 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+node *rev(node *head){
+    if (head->next==NULL)
+    {
+        return head;
+    }
+    node *small=rev(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return small;
+    
+}
