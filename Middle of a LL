@@ -1,0 +1,45 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+int lengthNode(node *head){
+    int length;
+   if(head->next==NULL)
+    {
+        return 1;
+    }
+    int newLength=lengthNode(head->next);
+    return (1+newLength);
+}
+
+void MidOfLL(node *head,int length){
+    node *temp=head;
+    int count=0;
+    if (length%2!=0)
+    {
+    while (count!=length/2)
+    {
+        temp=temp->next;
+        count++;
+    }
+    cout<<temp->data<<endl;
+    }
+    if (length%2==0)
+    {
+    while (count!=(length/2)-1)
+    {
+        temp=temp->next;
+        count++;
+    }
+    cout<<temp->data<<" ";
+    cout<<temp->next->data<<endl;
+    }
+
+    return; 
+}
