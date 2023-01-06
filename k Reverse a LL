@@ -1,0 +1,56 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+node *rev(node *head){
+    if (head->next==NULL)
+    {
+        return head;
+    }
+    node *small=rev(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return small;
+    
+}
+
+node *kReverse(node *head,int k){
+    node *temp=head;
+    int count=1; 
+    
+   if (head==NULL || head->next==NULL )
+   {
+    return head;
+   }
+  
+   
+    while (count!=k)
+    {
+        if (temp->next==NULL)
+    {
+        return temp;
+    }
+        temp=temp->next;
+        count++;
+    }
+    node *b=temp->next;
+    temp->next=NULL;
+   
+    node *a=rev(head);
+    node *t=a;
+    while (t->next!=NULL)
+    {
+        t=t->next;
+    }
+  
+    head=b;
+  
+    t->next=kReverse(head,k);
+    return a; 
+}
