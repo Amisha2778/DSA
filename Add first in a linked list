@@ -1,0 +1,17 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+node *addFirst(node *head,int value){
+    node *n=new node(value);
+    n->next=head;
+    head=n;
+    return head;
+}
+
