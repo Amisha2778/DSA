@@ -1,0 +1,31 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+int lengthNode(node *head){
+    int length;
+   if(head->next==NULL)
+    {
+        return 1;
+    }
+    int newLength=lengthNode(head->next);
+    return (1+newLength);
+}
+
+void KthElementFromEnd(node *head,int k,int length){
+    node *temp=head;
+    int count=0;
+    while (count!=length-k)
+    {
+        temp=temp->next;
+        count++;
+    }
+    cout<<temp->data;  
+    return; 
+}
