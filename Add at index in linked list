@@ -1,0 +1,22 @@
+
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+void insert(node *head,int i,int data){  
+    int count=0;
+    node *newNode=new node(data);
+    while(count<i-1){
+    head=head->next;
+    count++;
+    }
+    newNode->next=head->next;
+    head->next=newNode;
+
+}
