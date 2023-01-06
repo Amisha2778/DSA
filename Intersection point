@@ -1,1 +1,41 @@
+class Solution {
+public:
+int lengthNode(ListNode *head){
+    int length;
+   if(head->next==NULL)
+    {
+        return 1;
+    }
+    int newLength=lengthNode(head->next);
+    return (1+newLength);
+}
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+      int count=0;
+      int l1=lengthNode(headA);
+      int l2=lengthNode(headB);
+      if(l1>l2){
+          while(count!=l1-l2 && headA->next!=NULL){
+              headA=headA->next;
+              count++;
+          }
+      }
+      else if(l2>l1){
+          while(count!=l2-l1 && headB->next!=NULL){
+              headB=headB->next;
+              count++;
+          }
+      }
 
+      while(headA->next!=NULL && headB->next!=NULL && headA!=headB){ 
+          headA=headA->next;
+          headB=headB->next;
+      }
+
+      if(headA==headB){
+        return headA;
+      }
+
+      else
+      return NULL;
+    }
+};
