@@ -1,1 +1,38 @@
+class Solution {
+public:
+    ListNode* fleft;
+    int lengthNode(node *head){
+        int length;
+        if(head->next==NULL)
+        {
+          return 1;
+        }
+        int newLength=lengthNode(head->next);
+        return (1+newLength);
+     }
 
+
+    void fold(ListNode* right, int count){
+
+        if(right == NULL){
+            return;
+        }
+        fold(right->next, count+1);
+       
+        if(count>size/2){
+            ListNode* temp = fleft->next;
+            fleft->next = right;
+            right->next = temp;
+            fleft = temp;
+        }
+        else if(count == size/2){
+            tail = right;
+            right->next = NULL;
+        }
+
+    }
+    void reorderList(ListNode* head) {
+        fleft = head;
+        fold(head, 0);
+    }
+};
