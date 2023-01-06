@@ -1,0 +1,33 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+void palindrome1(node *head,int length,int l,int len){
+    node *temp=head;
+    int count=1;
+    if (len==l/2)
+    {
+        cout<<"yes"<<endl;
+        return;
+    }
+    while (count!=length)
+    {
+        temp=temp->next;
+        count++;
+    }
+    if (temp->data==head->data)
+    {
+        palindrome1(head->next,length-2,l,len-1);
+    }
+    else {
+    cout<<"no"<<endl;
+    return;
+    }
+    
+}
