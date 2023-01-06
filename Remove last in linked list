@@ -1,0 +1,20 @@
+class node{
+    public:
+    int data;
+    node *next;
+    node(int data){
+        this -> data = data;
+        next=nullptr;
+    }
+};
+
+void removeLast(node *head){
+    node *temp=head;
+    while (temp->next->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    node *a=temp->next;
+    delete a;
+    temp->next=NULL;   
+}
