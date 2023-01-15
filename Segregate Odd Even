@@ -1,1 +1,44 @@
+int lengthNode(ListNode *head){
+    int length;
+   if(head->next==NULL)
+    {
+        return 1;
+    }
+    int newLength=lengthNode(head->next);
+    return (1+newLength);
+}
+    ListNode* oddEvenList(ListNode* head) {
+        ListNode* temp=head;
+        ListNode* temp1=head;
+        int count=0;
+        int length=lengthNode(head);
+        while(temp1->next!=NULL){
+            temp1=temp1->next;
+        }
+        while(temp->next!=NULL && count!=length-1){
+            if(temp==head && temp->val%2==0){
+                ListNode* a=temp;
+                temp=temp->next;
+                head=head->next;
+                temp1->next=a;
+                temp1->next->next=NULL;
+            }
+            else{
+            if(temp->next->val%2==0){
+                ListNode* a=temp->next->next;
+                temp1->next=temp->next;
+                temp1->next->next=NULL;
+                temp1=temp1->next;
+                temp->next=a;
+            }
+            else{
+                temp=temp->next;
+            }
+            }
+            
+            count++;
+        }
+        return head;
 
+    }
+};
