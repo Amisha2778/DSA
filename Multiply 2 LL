@@ -1,1 +1,52 @@
-
+class Solution {
+public:
+ListNode *rev(ListNode *head){
+    if (head->next==NULL)
+    {
+        return head;
+    }
+    ListNode *small=rev(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return small;   
+    }
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+if(!l1||!l2){
+return NULL;}
+if(l1->val==0 || l2->vl==0){
+ListNode* head=new ListNode(0);
+return head;
+}
+        l1=rev(l1);
+        l2=rev(l2);
+        int carry=0;
+ListNode* tail=NULL;
+    ListNode* head=NULL;
+    int second=0;
+    int i=1;
+    while(l2){
+        second=second+(l2->val*i);
+        i=i*10;
+        l2=l2->next;
+    }
+    cout<<second;
+    while(l1||carry){
+        ListNode* temp;
+        int sum=(((l1?l1->val:0)*(second))+carry);
+        temp=new ListNode(sum%10);
+        carry=sum/10;
+        if(head==NULL){
+            head=temp;
+            tail=temp;
+        }
+        else{
+            tail->next=temp;
+            tail=tail->next;
+        }
+        l1=l1?l1->next:l1;
+        // l2=l2?l2->next:l2;
+    }
+    return rev(head);
+        
+    }
+};
