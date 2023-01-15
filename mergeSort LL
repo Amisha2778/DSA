@@ -1,1 +1,106 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+int lengthNode(ListNode *head){
+    int length;
+    if(head==NULL){
+        return 0;
+    }
+   if(head->next==NULL)
+    {
+        return 1;
+    }
+    int newLength=lengthNode(head->next);
+    return (1+newLength);
+}
+ListNode* mergeTwoLists(ListNode* head1, ListNode* head2) {
+         ListNode *temp2=NULL;
+         if(head1==NULL){
+             return head2;
+         }
+         else if(head2==NULL){
+             return head1;
+         }
+         else if(head1==NULL && head2==NULL){
+             return NULL;
+         }
+    
+    else{
+     if ((head1->val)<(head2->val)){
+       temp2=head1;
+       head1=head1->next;
+    }
+    else{
+    temp2=head2;
+    head2=head2->next;
+    }
+    ListNode *temp1=temp2;
+    while (head1!=NULL && head2!=NULL)
+    {
+        if((head1->val)<(head2->val))
+        {      
+           temp1->next=head1;
+           temp1=temp1->next;
+           head1=head1->next;
+        }
 
+        else{
+        
+           temp1->next=head2;
+           temp1=temp1->next;
+           head2=head2->next;
+        }
+
+        
+    }
+    if (head1!=NULL)
+    {
+        temp1->next=head1;
+    }
+     else if (head2!=NULL)
+    {
+        temp1->next=head2;
+    }
+    
+    return temp2;
+    }
+}
+
+
+ListNode* mergeSort(ListNode* head,int length){
+    int count=0;
+    if(head==NULL){
+        return NULL;
+    }
+    if(head->next==NULL){
+        return head;
+    }
+    ListNode* temp=head;
+    while(count!=(length/2)-1)
+    {
+       temp=temp?temp->next:NULL;
+       count++;
+    }
+    ListNode *mid=temp?temp->next:NULL;
+    temp->next=NULL;
+    ListNode* left=mergeSort(head,length/2);
+    ListNode* right=mergeSort(mid,length-(length/2));
+    ListNode* ans=mergeTwoLists(left,right);
+    return ans;
+}
+        
+    ListNode* sortList(ListNode* head) {
+        int length=lengthNode(head);
+        head=mergeSort(head,length);
+        return head;
+    }
+};
