@@ -1,1 +1,44 @@
-
+class Solution {
+public:
+    ListNode *rev(ListNode *head){
+    if (head->next==NULL)
+    {
+        return head;
+    }
+    ListNode *small=rev(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return small;   
+    }
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        l1=rev(l1);
+        l2=rev(l2);
+    while(l1 && l2){
+        ListNode* temp;
+        if(l1->val<l2->val){
+            l1->val=l1->val+10;
+            l1->next->val--;
+        }
+        int diff=((l1?l1->val:0)-(l2?l2->val:0));
+        temp=new ListNode(diff);
+        if(head==NULL){
+            head=temp;
+            tail=temp;
+        }
+        else{
+            tail->next=temp;
+            tail=tail->next;
+        }
+        l1=l1?l1->next:l1;
+        l2=l2?l2->next:l2;
+    }
+    while(l1){
+        ListNode* temp=new ListNode(l1->val);
+        tail->next=temp;
+        tail=tail->next;
+        l1=l1?l1->next:l1;
+    }
+    return rev(head);
+        
+    }
+};    
